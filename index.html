@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dragonball Combo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<input type="button" value="debug aus" id="debug-button" onclick="app.toggleOuput();">
+<div id="main-output" style="margin:10px;color:#000;background:#FFF;font-family: Verdana;font-size:10px;"></div>
+    
+<script>
+var app = {};
+app.gui = require('nw.gui');
+app.win = app.gui.Window.get();;
+app.fs = require('fs');
+app.tshark = "C:/Program Files/Wireshark/tshark.exe";
+app.spawn = require('child_process').spawn;    
+app.stop = false;
+app.found = false;
+app.queue = "";
+app.toggleOuput = function(){
+    app.stop = (app.stop === true ? false : true);
+    document.getElementById("debug-button").value = (app.stop ? "debug aus" : "debug an");
+};
+app.init = function(){        
+    app.output("initialization!");
+    app.fs.writeFile("./tshark.bat", '"' + app.tshark + '" -i Ethernet -T json -f "tcp"', function(){
+        app.ts = app.spawn("cmd.exe", ['/c', 'tshark.bat']);    
+        app.ts.stdout.on('data', function(data){            
+            if(app.found === false){                    
+                var str = data.toString();
+                app.queue += str;                            
+            }
+        });
+        app.ts.stderr.on('data', function(data) {
+            app.output('stderr: ' + data);
+        });
+        app.ts.on('exit', function(code){
+           app.output('child process exited with code ' + code);
+        });
+        app.output('starting tshark');        
+        app.handle();
+    });
+};
+app._outputs = [];
+app.output = function(text){
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var time = (h < 10 ? "0" : "") + h + ":" + 
+               (m < 10 ? "0" : "") + m  + ":" + 
+               (s < 10 ? "0" : "") + s;
+    app._outputs = app._outputs.slice(0,25);
+    app._outputs.unshift("[" + time + "] " + text);
+    app.showOutput();
+};
+app.showOutput = function(){
+    document.getElementById("main-output").innerHTML = app._outputs.join("<br>");
+};
+app.handle = function(){
+    setTimeout(function(){
+        var str = app.queue + "";
+        app.queue = "";        
+        var r = app.parse(str);
+        if(app.found !== true){
+            app.output("got " + r + " pay loads!");
+            app.handle();
+        }
+    }, 1000);
+};
+app.parse = function(str){
+    var p = str.split("tcp.payload");
+    for(var i = 1; i < p.length; i++){
+        var s = p[i].substr(4, p[i].length);       
+        var f = "";
+        for(var j = 0; j < s.length; j++){                        
+            if(s.charAt(j) == '"'){
+                f = s.substr(0, j);
+                break;
+            }
+        }
+        if(f === ""){
+        }
+        else{
+            app.handleData(f);
+        }
+    }
+    return p.length;
+};
+app.handleData = function(data){
+    var str = '';
+    var section = data.split(":");
+    for(var x in section){
+        str += String.fromCharCode(parseInt(section[x], 16));
+    }
+    var p = Math.max(str.indexOf("combo"), str.indexOf("urprise"));
+    if(app.stop === false){
+        //app.output(str);
+    }
+    if(p > -1){
+        app.output(str);
+        app.found = true;
+        var combo = "";
+        var inCombo = false;
+        for(var i = p*1; i < p+30; i++){
+            if(str.charAt(i) == "4" || str.charAt(i) == "3"){
+                inCombo = true;
+                combo += str.charAt(i);
+            }
+            else{
+                if(inCombo === true){
+                    break;
+                }
+                inCombo = false;
+            }
+        }        
+        app.output(combo);
+        app.output("the combo is: " + app.createCombo(combo));
+    }
+};
+app.createCombo = function(combo){
+    var result = "";
+    for(var i = 0; i < 5; i++){
+        if(result != "") result += " - ";
+        result += (combo.charAt(i) == "3" ? "GREAT" : "PERFECT");
+    }
+    return result;
+};
+
+app.init();
+
+</script>    
+    
+</body>
+</html>
+

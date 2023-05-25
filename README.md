@@ -14,7 +14,9 @@ To get a daily combo just
 
 # downloads
 NwJS: https://nwjs.io/
+
 WireShark: https://www.wireshark.org/download.html
+
 BlueStacks: https://www.bluestacks.com/
 
 # hints

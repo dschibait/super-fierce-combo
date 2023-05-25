@@ -20,7 +20,7 @@ WireShark: https://www.wireshark.org/download.html
 BlueStacks: https://www.bluestacks.com/
 
 # hints
-- tool is just tested on EU version 
+- is also tested on US Version
 - only tested on Windows 
 - only tested with Bluestack
 
@@ -55,7 +55,7 @@ KAAAAAMEEEEE HAAAAAAAMEEEEE HAAAA!
 
 Game is also known as:
 Cross universe Warrior
-Zfighters or z-fighers
+Zfighters or z-fighters
 xenoverse 
 Warriors Attack: Defender
 GT Legends: Last Battle

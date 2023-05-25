@@ -2,7 +2,7 @@
 this tool is showing the daily combo for a dragonball mobile game by fetching packages from server. 
 
 # setup the tool
-- first use a NwJS version you like (tool use nothing special here) and put the index.html file into the NwJS project.
+- first use a NwJS version you like (tool use nothing special here) and put the index.html and package.json file into the NwJS project.
 - Install wireshark and change the path in index.html where it is located
 - install bluestacks (or use any other emulator) and install the game
 
@@ -11,6 +11,11 @@ To get a daily combo just
 - log into your account and start any fight (can be a story fight or so)
 - during fight is loading the tool should recognize the daily combo
 - notice combo is only sent when you don't finished it at this day
+
+# downloads
+NwJS: https://nwjs.io/
+WireShark: https://www.wireshark.org/download.html
+BlueStacks: https://www.bluestacks.com/
 
 # hints
 - tool is just tested on EU version 

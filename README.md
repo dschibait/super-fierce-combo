@@ -46,4 +46,14 @@ KAAAAAMEEEEE HAAAAAAAMEEEEE HAAAA!
 
 
 
+Game is also known as:
+Cross universe Warrior
+Zfighters or z-fighers
+xenoverse 
+Warriors Attack: Defender
+GT Legends: Last Battle
+Saiyan Ultra Xenoverse
+Cross Universe Warriors
+Dragonfighters
+Super Fierce Battle Z or Super Fierce Battle-Z 
 

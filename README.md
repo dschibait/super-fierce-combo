@@ -19,6 +19,9 @@ WireShark: https://www.wireshark.org/download.html
 
 BlueStacks: https://www.bluestacks.com/
 
+# preview
+[![Youtube Preview Showcase](https://img.youtube.com/vi/NqtOyT50xEI/0.jpg)](https://www.youtube.com/watch?v=NqtOyT50xEI)
+
 # hints
 - is also tested on US Version
 - only tested on Windows 

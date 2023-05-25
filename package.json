@@ -1,0 +1,12 @@
+{
+    "name": "Dragonball Combo Tool",
+    "version": "1.0.0",
+    "keywords": [
+        "util"
+    ],
+    "author": "Dschi",
+    "contributors": [],
+    "dependencies": {
+    },
+    "main": "index.html"
+}
